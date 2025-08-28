@@ -3,11 +3,17 @@
   <groupId>com.eni.tommy</groupId>
   <artifactId>jenkins_maven</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <distributionManagement>
+
+
+<distributionManagement>
   <repository>
-    <id>nexus</id>
+    <id>nexus-releases</id>
     <url>http://nexus:8081/repository/maven-releases/</url>
   </repository>
+  <snapshotRepository>
+    <id>nexus-snapshots</id>
+    <url>http://nexus:8081/repository/maven-snapshots/</url>
+  </snapshotRepository>
 </distributionManagement>
 
 <build>
