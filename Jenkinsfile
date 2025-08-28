@@ -3,7 +3,7 @@ pipeline {
 
   tools {
     jdk   'JDK17'  // défini dans Global Tool Configuration
-    maven 'M3'     // idem
+    maven 'Maven3'     // idem
   }
 
   environment {
