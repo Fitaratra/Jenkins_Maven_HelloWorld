@@ -26,14 +26,22 @@ pipeline {
 
     stage('SonarQube Analysis') {
       steps {
-        withCredentials([string(credentialsId: 'SonarQube', variable: 'SONAR_TOKEN')]) {
-          sh """
-            mvn -B sonar:sonar \
-               -Dsonar.host.url=${SONAR_HOST} \
-               -Dsonar.login=${SONAR_TOKEN}
-          """
+
+        
+        
+         withSonarQubeEnv('SonarQube') {
+            withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
+                sh """
+                   mvn clean verify sonar:sonar \
+                     -Dsonar.projectKey=jenkins_maven \
+                     -Dsonar.host.url=http://sonarqube:9000 \
+                     -Dsonar.login=$SONAR_TOKEN
+                """
+            }
         }
+        
       }
+      
     }
 
     stage('Deploy to Nexus') {
