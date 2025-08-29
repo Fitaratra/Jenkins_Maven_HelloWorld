@@ -29,7 +29,7 @@ pipeline {
 
         
         
-         withSonarQubeEnv('SonarQube') {
+         withSonarQubeEnv('SonarQubeServer') {
             withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
                 sh """
                    mvn clean verify sonar:sonar \
