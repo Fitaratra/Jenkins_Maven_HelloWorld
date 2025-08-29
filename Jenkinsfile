@@ -26,16 +26,16 @@ pipeline {
 
     stage('SonarQube Analysis') {
       steps {
-	      withSonarQubeEnv('SonarQube') {
-		      withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
-		        sh '''
-		          mvn clean verify sonar:sonar \
-		            -Dsonar.projectKey=jenkins_maven \
-		            -Dsonar.host.url=http://sonarqube:9000 \
-		            -Dsonar.login=${SONAR_TOKEN}
-		        '''
-		      }
-	    }
+        withSonarQubeEnv('SonarQubeServer') {
+      withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
+        sh '''
+          mvn clean verify sonar:sonar \
+            -Dsonar.projectKey=jenkins_maven \
+            -Dsonar.host.url=http://sonarqube:9000 \
+            -Dsonar.login=${SONAR_TOKEN}
+        '''
+      }
+    }
         
       }
       
